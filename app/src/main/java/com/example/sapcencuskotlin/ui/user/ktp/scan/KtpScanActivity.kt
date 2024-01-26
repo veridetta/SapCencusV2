@@ -1,9 +1,8 @@
-package com.example.sapcencuskotlin
+package com.example.sapcencuskotlin.ui.user.ktp.scan
 
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -14,32 +13,24 @@ import android.util.Log
 import android.util.Pair
 import android.view.View
 import android.view.Window
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ImageView
-import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.net.toUri
-import com.example.sapcencuskotlin.graph.FaceContourGraphic
+import com.example.sapcencuskotlin.R
+import com.example.sapcencuskotlin.ui.user.ktp.result.ResultActivity
 import com.example.sapcencuskotlin.graph.GraphicOverlay
 import com.example.sapcencuskotlin.graph.TextGraphic
 import com.example.sapcencuskotlin.ocr.GenerateKTPData
 import com.example.sapcencuskotlin.permissionkit.askPermissions
 import com.google.mlkit.vision.common.InputImage
-import com.google.mlkit.vision.face.Face
-import com.google.mlkit.vision.face.FaceDetection
-import com.google.mlkit.vision.face.FaceDetectorOptions
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 import com.marchinram.rxgallery.RxGallery
 import timber.log.Timber
-import java.io.IOException
-import java.io.InputStream
 import java.util.PriorityQueue
 
 

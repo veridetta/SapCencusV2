@@ -1,9 +1,12 @@
 package com.example.sapcencuskotlin.helper
 
 import android.R
+import android.content.Context
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.appcompat.app.AppCompatActivity
+import com.example.sapcencuskotlin.model.UserModel
 import com.google.android.material.snackbar.Snackbar
 
 fun levenshteinDistance(s1: String, s2: String): Int {
@@ -61,6 +64,66 @@ fun cekSimilarity(sp: Spinner, genderOptions: Array<String>, userInput: String) 
     }
 }
 
-fun showSnackbar(view: View, message: String) {
+fun showSnackbar(context: Context, message: String) {
+    val activity = context as AppCompatActivity
+    val view = activity.findViewById<View>(android.R.id.content)
     Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
+}
+
+fun saveUser(context: Context, paketModel: UserModel) {
+    val sharedPreferences = context.getSharedPreferences("USER", Context.MODE_PRIVATE)
+    val editor = sharedPreferences.edit()
+    editor.putString("dataDocid", paketModel.docid)
+    editor.putString("dataPin", paketModel.pin)
+    editor.putString("dataName", paketModel.name)
+    editor.putString("dataRole", paketModel.role)
+    editor.putString("dataUid", paketModel.uid)
+    editor.putBoolean("dataIsLogin", paketModel.isLogin)
+    editor.apply()
+}
+fun getUser(context: Context): UserModel {
+    val sharedPreferences = context.getSharedPreferences("USER", Context.MODE_PRIVATE)
+    val paketModel = UserModel()
+    paketModel.docid = sharedPreferences.getString("dataDocid", "")
+    paketModel.pin = sharedPreferences.getString("dataPin", "")
+    paketModel.name = sharedPreferences.getString("dataName", "")
+    paketModel.role = sharedPreferences.getString("dataRole", "")
+    paketModel.uid = sharedPreferences.getString("dataUid", "")
+    paketModel.isLogin = sharedPreferences.getBoolean("dataIsLogin", false)
+    return paketModel
+}
+fun clearUser(context: Context) {
+    val sharedPreferences = context.getSharedPreferences("USER", Context.MODE_PRIVATE)
+    val editor = sharedPreferences.edit()
+    editor.clear()
+    editor.apply()
+}
+
+fun saveTempUser(context: Context, paketModel: UserModel) {
+    val sharedPreferences = context.getSharedPreferences("TEMPUSER", Context.MODE_PRIVATE)
+    val editor = sharedPreferences.edit()
+    editor.putString("dataDocid", paketModel.docid)
+    editor.putString("dataPin", paketModel.pin)
+    editor.putString("dataName", paketModel.name)
+    editor.putString("dataRole", paketModel.role)
+    editor.putString("dataUid", paketModel.uid)
+    editor.putBoolean("dataIsLogin", paketModel.isLogin)
+    editor.apply()
+}
+fun getTempUser(context: Context): UserModel {
+    val sharedPreferences = context.getSharedPreferences("TEMPUSER", Context.MODE_PRIVATE)
+    val paketModel = UserModel()
+    paketModel.docid = sharedPreferences.getString("dataDocid", "")
+    paketModel.pin = sharedPreferences.getString("dataPin", "")
+    paketModel.name = sharedPreferences.getString("dataName", "")
+    paketModel.role = sharedPreferences.getString("dataRole", "")
+    paketModel.uid = sharedPreferences.getString("dataUid", "")
+    paketModel.isLogin = sharedPreferences.getBoolean("dataIsLogin", false)
+    return paketModel
+}
+fun clearTempUser(context: Context) {
+    val sharedPreferences = context.getSharedPreferences("TEMPUSER", Context.MODE_PRIVATE)
+    val editor = sharedPreferences.edit()
+    editor.clear()
+    editor.apply()
 }

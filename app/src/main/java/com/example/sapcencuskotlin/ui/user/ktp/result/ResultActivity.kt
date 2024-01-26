@@ -1,4 +1,4 @@
-package com.example.sapcencuskotlin
+package com.example.sapcencuskotlin.ui.user.ktp.result
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.Spinner
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.example.sapcencuskotlin.R
 import com.example.sapcencuskotlin.api.ApiService
 import com.example.sapcencuskotlin.helper.cekSimilarity
 import com.example.sapcencuskotlin.helper.initSpinner
@@ -20,7 +21,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
-import java.util.regex.Pattern
 
 class ResultActivity : AppCompatActivity() {
     lateinit var konten : RelativeLayout

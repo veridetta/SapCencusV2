@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -33,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -58,5 +62,17 @@ dependencies {
     implementation("io.reactivex.rxjava2:rxkotlin:2.3.0")
     implementation("io.reactivex.rxjava2:rxjava:2.2.6")
     implementation("com.jakewharton.timber:timber:4.7.1")
+
+    //firebase dependencies
+    implementation(platform("com.google.firebase:firebase-bom:32.2.2"))
+
+//    implementation("com.google.firebase:firebase-auth-ktx:21.1.0")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.4.1")
+    implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+//    implementation("com.google.firebase:firebase-storage:20.3.0")
+    implementation("com.google.firebase:firebase-appcheck-debug:17.1.1")
+    //appcheck
+
+
 
 }

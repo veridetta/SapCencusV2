@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">SapCencus</string>
+    <string name="app_name">SnapCencus</string>
     <string name="select_image_for_text_recognition">Select image for text recognition</string>
+    <string name="desa">Desa Bulila</string>
     <string name="find_text_button">Find text</string>
     <string name="find_face_contour_button">Find face contour</string>
     <string name="find_text_cloud_button">Find text (cloud)</string>
@@ -9,4 +10,8 @@
     <string name="start_capture">Start Capture</string>
     <string name="stop_capture">Stop Capture</string>
     <string name="action_settings">Settings</string>
+    <array name="role">
+        <item>Admin</item>
+        <item>Aparat Desa</item>
+    </array>
 </resources>
