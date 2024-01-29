@@ -6,6 +6,8 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
+import com.example.sapcencuskotlin.model.KKModel
+import com.example.sapcencuskotlin.model.KTPModel
 import com.example.sapcencuskotlin.model.UserModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -123,6 +125,79 @@ fun getTempUser(context: Context): UserModel {
 }
 fun clearTempUser(context: Context) {
     val sharedPreferences = context.getSharedPreferences("TEMPUSER", Context.MODE_PRIVATE)
+    val editor = sharedPreferences.edit()
+    editor.clear()
+    editor.apply()
+}
+
+fun saveKTP(context: Context, ktpModel: KTPModel) {
+    val sharedPreferences = context.getSharedPreferences("KTP", Context.MODE_PRIVATE)
+    val editor = sharedPreferences.edit()
+    editor.putString("dataNik", ktpModel.nik)
+    editor.putString("dataNamaLengkap", ktpModel.nama_lengkap)
+    editor.putString("dataJenisKelamin", ktpModel.jenis_kelamin)
+    editor.putString("dataAgama", ktpModel.agama)
+    editor.putString("dataTempatLahir", ktpModel.tempat_lahir)
+    editor.putString("dataTanggalLahir", ktpModel.tanggal_lahir)
+    editor.putString("dataPekerjaan", ktpModel.pekerjaan)
+    editor.putString("dataStatusWni", ktpModel.status_wni)
+    editor.putString("dataRw", ktpModel.rw)
+    editor.putString("dataRt", ktpModel.rt)
+    editor.putString("dataStatusKawin", ktpModel.status_kawin)
+    editor.putString("dataGoldar", ktpModel.goldar)
+    editor.putString("dataAlamat", ktpModel.alamat)
+    //kelurahan dan kecamatan
+    editor.putString("dataKelurahan", ktpModel.kelurahan)
+    editor.putString("dataKecamatan", ktpModel.kecamatan)
+    editor.apply()
+}
+fun getKTP(context: Context): KTPModel {
+    val sharedPreferences = context.getSharedPreferences("KTP", Context.MODE_PRIVATE)
+    val ktpModel = KTPModel()
+    ktpModel.nik = sharedPreferences.getString("dataNik", "")
+    ktpModel.nama_lengkap = sharedPreferences.getString("dataNamaLengkap", "")
+    ktpModel.jenis_kelamin = sharedPreferences.getString("dataJenisKelamin", "")
+    ktpModel.agama = sharedPreferences.getString("dataAgama", "")
+    ktpModel.tempat_lahir = sharedPreferences.getString("dataTempatLahir", "")
+    ktpModel.tanggal_lahir = sharedPreferences.getString("dataTanggalLahir", "")
+    ktpModel.pekerjaan = sharedPreferences.getString("dataPekerjaan", "")
+    ktpModel.status_wni = sharedPreferences.getString("dataStatusWni", "")
+    ktpModel.rw = sharedPreferences.getString("dataRw", "")
+    ktpModel.rt = sharedPreferences.getString("dataRt", "")
+    ktpModel.status_kawin = sharedPreferences.getString("dataStatusKawin", "")
+    ktpModel.goldar = sharedPreferences.getString("dataGoldar", "")
+    ktpModel.alamat = sharedPreferences.getString("dataAlamat", "")
+    //kelurahan dan kecamatan
+    ktpModel.kelurahan = sharedPreferences.getString("dataKelurahan", "")
+    ktpModel.kecamatan = sharedPreferences.getString("dataKecamatan", "")
+    return ktpModel
+}
+fun clearKTP(context: Context) {
+    val sharedPreferences = context.getSharedPreferences("KTP", Context.MODE_PRIVATE)
+    val editor = sharedPreferences.edit()
+    editor.clear()
+    editor.apply()
+}
+fun saveKK(context: Context, kkModel: KKModel){
+    val sharedPreferences = context.getSharedPreferences("KK", Context.MODE_PRIVATE)
+    val editor = sharedPreferences.edit()
+    editor.putString("dataHubunganKeluarga", kkModel.hubungan_keluarga)
+    editor.putString("dataPendidikan", kkModel.pendidikan)
+    editor.putString("dataNamaAyah", kkModel.nama_ayah)
+    editor.putString("dataNamaIbu", kkModel.nama_ibu)
+    editor.apply()
+}
+fun getKK(context: Context): KKModel {
+    val sharedPreferences = context.getSharedPreferences("KK", Context.MODE_PRIVATE)
+    val kkModel = KKModel()
+    kkModel.hubungan_keluarga = sharedPreferences.getString("dataHubunganKeluarga", "")
+    kkModel.pendidikan = sharedPreferences.getString("dataPendidikan", "")
+    kkModel.nama_ayah = sharedPreferences.getString("dataNamaAyah", "")
+    kkModel.nama_ibu = sharedPreferences.getString("dataNamaIbu", "")
+    return kkModel
+}
+fun clearKK(context: Context) {
+    val sharedPreferences = context.getSharedPreferences("KK", Context.MODE_PRIVATE)
     val editor = sharedPreferences.edit()
     editor.clear()
     editor.apply()

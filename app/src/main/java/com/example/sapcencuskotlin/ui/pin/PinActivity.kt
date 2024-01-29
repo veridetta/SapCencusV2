@@ -25,6 +25,7 @@ class PinActivity : AppCompatActivity() {
         initView()
         isLoading()
         initIntent()
+        initListener()
     }
     fun initView(){
         viewModel = ViewModelProvider(this)[PinVM::class.java]
@@ -44,6 +45,7 @@ class PinActivity : AppCompatActivity() {
         role = intent.getStringExtra("role").toString()
     }
     fun initListener(){
+        binding.etPin.isEnabled = false
         binding.btn1.setOnClickListener {
             pin += "1"
             binding.etPin.setText(pin)

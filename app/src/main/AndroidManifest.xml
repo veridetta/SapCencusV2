@@ -31,6 +31,12 @@
         android:theme="@style/Theme.SapCencus"
         tools:targetApi="31">
         <activity
+            android:name=".ui.user.kk.result.ResultKKActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.user.kk.scan.KKScanActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.admin.adduser.AddUserActivity"
             android:exported="false" />
         <activity
@@ -70,14 +76,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-        <activity
-            android:name=".ui.user.ktp.result.ResultActivity"
-            android:exported="false"
-            android:parentActivityName=".ui.user.ktp.scan.MainActivity" />
-        <activity
-            android:name=".ui.user.ktp.scan.MainActivity"
-            android:exported="true" />
 
         <meta-data
             android:name="com.google.mlkit.vision.DEPENDENCIES"

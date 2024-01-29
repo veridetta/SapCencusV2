@@ -73,6 +73,4 @@ dependencies {
     implementation("com.google.firebase:firebase-appcheck-debug:17.1.1")
     //appcheck
 
-
-
 }

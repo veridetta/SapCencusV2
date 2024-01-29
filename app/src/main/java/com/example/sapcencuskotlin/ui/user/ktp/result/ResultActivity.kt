@@ -1,5 +1,6 @@
 package com.example.sapcencuskotlin.ui.user.ktp.result
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,10 +12,15 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.sapcencuskotlin.R
 import com.example.sapcencuskotlin.api.ApiService
 import com.example.sapcencuskotlin.helper.cekSimilarity
+import com.example.sapcencuskotlin.helper.getKK
+import com.example.sapcencuskotlin.helper.getKTP
 import com.example.sapcencuskotlin.helper.initSpinner
+import com.example.sapcencuskotlin.helper.saveKTP
 import com.example.sapcencuskotlin.helper.showSnackbar
 import com.example.sapcencuskotlin.model.GetModel
+import com.example.sapcencuskotlin.model.KTPModel
 import com.example.sapcencuskotlin.model.ResponseModel
+import com.example.sapcencuskotlin.ui.user.kk.scan.KKScanActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,6 +43,8 @@ class ResultActivity : AppCompatActivity() {
     lateinit var spAgama: Spinner
     lateinit var spStatus: Spinner
     lateinit var spPekerjaan: Spinner
+    lateinit var spStatusWNI : Spinner
+    lateinit var spGoldar : Spinner
     lateinit var btnSimpan : Button
     lateinit var lyProses : CoordinatorLayout
     var stringMentah =""
@@ -53,6 +61,8 @@ class ResultActivity : AppCompatActivity() {
     var sJk = ""
     var sStatus = ""
     var sPekerjaan = ""
+    var sWni = ""
+    var golDar = ""
 
     var qKtp=""
     var qNama=""
@@ -67,6 +77,8 @@ class ResultActivity : AppCompatActivity() {
     var qStatus=""
     var qPekerjaan=""
     var qJk=""
+    var qWni = ""
+    var qGolDar = ""
     var isCamera = false
 
 
@@ -95,6 +107,8 @@ class ResultActivity : AppCompatActivity() {
         spStatus = findViewById(R.id.spStatus)
         spJk = findViewById(R.id.spJk)
         spPekerjaan = findViewById(R.id.spPekerjaan)
+        spStatusWNI = findViewById(R.id.spStatusWni)
+        spGoldar = findViewById(R.id.spGoldar)
         lyProses = findViewById(R.id.lyProses)
         lyProses.visibility = CoordinatorLayout.VISIBLE
     }
@@ -112,6 +126,18 @@ class ResultActivity : AppCompatActivity() {
         sAgama = intent.getStringExtra("agama").toString()
         sJk = intent.getStringExtra("jenisKelamin").toString()
         sStatus = intent.getStringExtra("statusPerkawinan").toString()
+        val ktp = getKTP(this)
+        sKtp = ktp.nik.toString()
+        sNama = ktp.nama_lengkap.toString()
+        sJk = ktp.jenis_kelamin.toString()
+        sAgama = ktp.agama.toString()
+        sTempatLahir = ktp.tempat_lahir.toString()
+        sTanggalLahir = ktp.tanggal_lahir.toString()
+        sPekerjaan = ktp.pekerjaan.toString()
+        sWni = ktp.status_wni.toString()
+        sRtRw = ktp.rt.toString()+"/"+ktp.rw.toString()
+        sStatus = ktp.status_kawin.toString()
+        golDar = ktp.goldar.toString()
     }
 
     private fun setView(){
@@ -166,6 +192,45 @@ class ResultActivity : AppCompatActivity() {
                             rwList.add("0$i")
                         }
                     }
+                    val statusWniList = mutableListOf<String>()
+                    statusWniList.add("WNI")
+                    statusWniList.add("WNA")
+                    statusWniList.add("DUA KEWARGANEGARAAN")
+                    val statusWniIdList = mutableListOf<String>()
+                    statusWniIdList.add("1")
+                    statusWniIdList.add("2")
+                    statusWniIdList.add("3")
+                    val goldarList = mutableListOf<String>()
+                    goldarList.add("A")
+                    goldarList.add("B")
+                    goldarList.add("AB")
+                    goldarList.add("O")
+                    goldarList.add("A+")
+                    goldarList.add("A-")
+                    goldarList.add("B+")
+                    goldarList.add("B-")
+                    goldarList.add("AB+")
+                    goldarList.add("AB-")
+                    goldarList.add("O+")
+                    goldarList.add("O-")
+                    goldarList.add("TIDAK TAHU")
+                    val goldarIdList = mutableListOf<String>()
+                    goldarIdList.add("1")
+                    goldarIdList.add("2")
+                    goldarIdList.add("3")
+                    goldarIdList.add("4")
+                    goldarIdList.add("5")
+                    goldarIdList.add("6")
+                    goldarIdList.add("7")
+                    goldarIdList.add("8")
+                    goldarIdList.add("9")
+                    goldarIdList.add("10")
+                    goldarIdList.add("11")
+                    goldarIdList.add("12")
+                    goldarIdList.add("13")
+
+                    initSpinner(spGoldar, goldarList.toTypedArray())
+                    initSpinner(spStatusWNI, statusWniList.toTypedArray())
                     initSpinner(spRt, rtList.toTypedArray())
                     initSpinner(spJk, namaJenisKelaminList.toTypedArray())
                     initSpinner(spAgama, namaAgamaList.toTypedArray())
@@ -183,28 +248,53 @@ class ResultActivity : AppCompatActivity() {
                     cekSimilarity(spAgama,namaAgamaList.toTypedArray(), sAgama)
                     cekSimilarity(spStatus,namaStatusList.toTypedArray(), sStatus)
                     cekSimilarity(spPekerjaan,namaPekerjaanList.toTypedArray(), sPekerjaan)
+                    cekSimilarity(spStatusWNI,statusWniList.toTypedArray(), sWni)
+                    cekSimilarity(spGoldar,goldarList.toTypedArray(), golDar)
                     lyProses.visibility = CoordinatorLayout.GONE
                     btnSimpan.setOnClickListener {
                         lyProses.visibility = CoordinatorLayout.VISIBLE
                         qKtp = etNik.text.toString()
                         qNama = etNama.text.toString()
+                        qJk = idJenisKelaminList[namaJenisKelaminList.indexOf(spJk.selectedItem.toString())]
+                        qAgama = idAgamaList[namaAgamaList.indexOf(spAgama.selectedItem.toString())]
                         qTempat = etTempat.text.toString()
                         //etTanggal = 25-10-1972 diubah ke 1972-10-25
                         val tgl = etTanggal.text.toString().split("-")
                         etTanggal.setText(tgl[2]+"-"+tgl[1]+"-"+tgl[0])
                         qTanggal = etTanggal.text.toString()
-                        qAlamat = etAlamat.text.toString()
+                        qPekerjaan = idPekerjaanList[namaPekerjaanList.indexOf(spPekerjaan.selectedItem.toString())]
+                        qWni = statusWniIdList[statusWniList.indexOf(spStatusWNI.selectedItem.toString())]
                         qRt = spRt.selectedItem.toString()
                         qRw = spRw.selectedItem.toString()
+                        qStatus = idStatusList[namaStatusList.indexOf(spStatus.selectedItem.toString())]
+                        qGolDar = goldarIdList[goldarList.indexOf(spGoldar.selectedItem.toString())]
+                        qAlamat = etAlamat.text.toString()
                         qKelurahan = idDusunList[namaDusunList.indexOf(spKelurahan.selectedItem.toString())]
                         qKecamatan = etKecamatan.text.toString()
-                        qAgama = idAgamaList[namaAgamaList.indexOf(spAgama.selectedItem.toString())]
-                        qStatus = idStatusList[namaStatusList.indexOf(spStatus.selectedItem.toString())]
-                        qPekerjaan = idPekerjaanList[namaPekerjaanList.indexOf(spPekerjaan.selectedItem.toString())]
-                        qJk = idJenisKelaminList[namaJenisKelaminList.indexOf(spJk.selectedItem.toString())]
                         //masukkan log
                         Log.d("ResultActivity", "datanya: $qKtp $qNama $qTempat $qTanggal $qAlamat $qRt $qRw $qKelurahan $qKecamatan $qAgama $qStatus $qPekerjaan $qJk")
-                        postData()
+                        //postData()
+                        val ktpData = KTPModel()
+                        ktpData.nik = qKtp
+                        ktpData.nama_lengkap = qNama
+                        ktpData.jenis_kelamin = qJk
+                        ktpData.agama = qAgama
+                        ktpData.tempat_lahir = qTempat
+                        ktpData.tanggal_lahir = qTanggal
+                        ktpData.pekerjaan = qPekerjaan
+                        ktpData.status_wni = qWni
+                        ktpData.rt = qRt
+                        ktpData.rw = qRw
+                        ktpData.status_kawin = qStatus
+                        ktpData.goldar = qGolDar
+                        ktpData.alamat = qAlamat
+                        ktpData.kelurahan = qKelurahan
+                        ktpData.kecamatan = qKecamatan
+                        saveKTP(this@ResultActivity, ktpData)
+                        //intent
+                        val intent = Intent(this@ResultActivity, KKScanActivity::class.java)
+                        startActivity(intent)
+
                     }
                 } else {
                     // Handle jika respons tidak berhasil
@@ -220,47 +310,6 @@ class ResultActivity : AppCompatActivity() {
                 Log.d("cek data", "onFailure: ${t.message}")
                 lyProses.visibility = CoordinatorLayout.GONE
 
-            }
-        })
-    }
-
-
-    fun postData(){
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://desabulila.com")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-        val service = retrofit.create(ApiService::class.java)
-        // Mengganti dengan nilai-nilai yang diperoleh dari input pengguna
-        val call = service.postData(qKtp, qNama, qTempat, qTanggal, qAlamat, qRt, qRw, qKelurahan, qKecamatan, qAgama, qStatus, qPekerjaan, qJk)
-        call.enqueue(object : Callback<ResponseModel> {
-            override fun onResponse(
-                call: Call<ResponseModel>,
-                response: Response<ResponseModel>
-            ) {
-                if (response.isSuccessful) {
-                    // Berhasil melakukan permintaan
-                    if(response.body()?.kode == 1){
-                        // Berhasil mengirim data
-                        showSnackbar(konten, response.body()?.pesan.toString())
-                        lyProses.visibility = CoordinatorLayout.GONE
-                    } else {
-                        // Gagal mengirim data
-                        showSnackbar(konten, response.body()?.pesan.toString())
-                        Log.d("cek data", "onResponse: ${response.body()?.pesan.toString()}")
-                        lyProses.visibility = CoordinatorLayout.GONE
-                    }
-                } else {
-                    // Handle respons gagal dari server
-                    showSnackbar(konten, response.message())
-                    lyProses.visibility = CoordinatorLayout.GONE
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseModel>, t: Throwable) {
-                // Handle jika ada kegagalan dalam permintaan jaringan
-                showSnackbar(konten, t.message.toString())
-                lyProses.visibility = CoordinatorLayout.GONE
             }
         })
     }

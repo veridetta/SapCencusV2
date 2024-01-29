@@ -15,6 +15,7 @@ import com.example.sapcencuskotlin.ui.pin.PinActivity
 class HomeActivity : AppCompatActivity() {
     lateinit var binding : ActivityHomeBinding
     var role = ""
+    var init =0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
@@ -32,10 +33,13 @@ class HomeActivity : AppCompatActivity() {
         spinner.adapter = adapter
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                role = rolesArray[position]
-                val intent = Intent(this@HomeActivity, PinActivity::class.java)
-                intent.putExtra("role", role)
-                startActivity(intent)
+                if(init>0){
+                    role = rolesArray[position]
+                    val intent = Intent(this@HomeActivity, PinActivity::class.java)
+                    intent.putExtra("role", role)
+                    startActivity(intent)
+                }
+                init++
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {

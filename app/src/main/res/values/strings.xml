@@ -11,6 +11,7 @@
     <string name="stop_capture">Stop Capture</string>
     <string name="action_settings">Settings</string>
     <array name="role">
+        <item>--PILIH ROLE--</item>
         <item>Admin</item>
         <item>Aparat Desa</item>
     </array>

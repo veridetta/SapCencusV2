@@ -13,6 +13,7 @@ import com.example.sapcencuskotlin.adapter.UserAdapter
 import com.example.sapcencuskotlin.databinding.ActivityListUserBinding
 import com.example.sapcencuskotlin.helper.saveTempUser
 import com.example.sapcencuskotlin.model.UserModel
+import com.example.sapcencuskotlin.ui.admin.adduser.AddUserActivity
 import com.example.sapcencuskotlin.ui.admin.edituser.EditUserActivity
 
 class ListUserActivity : AppCompatActivity() {
@@ -25,6 +26,7 @@ class ListUserActivity : AppCompatActivity() {
         initView()
         initRv()
         isLoading()
+        initListener()
 
     }
     fun initView(){
@@ -67,6 +69,12 @@ class ListUserActivity : AppCompatActivity() {
     }
     override fun onResume() {
         super.onResume()
-        vm.getData(this)
+        initRv()
+    }
+    fun initListener(){
+        binding.btnTambah.setOnClickListener {
+            val intent = Intent(this, AddUserActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

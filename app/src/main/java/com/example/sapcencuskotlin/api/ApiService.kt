@@ -18,16 +18,24 @@ interface ApiService {
     fun postData(
         @Field("nik") qKtp: String,
         @Field("nama") qNama: String,
+        @Field("sex") qJk: String,
+        @Field("agama_id") qAgama: String,
         @Field("tempatlahir") qTempat: String,
         @Field("tanggallahir") qTanggal: String,
-        @Field("alamat") qAlamat: String,
+        @Field("pekerjaan_id") qPekerjaan: String,
+        @Field("warganegara_id") qWni: String,
         @Field("qRt") qRt: String,
         @Field("qRw") qRw: String,
+        @Field("status_kawin") qStatus: String,
+        @Field("golongan_darah_id") qGoldar: String,
+        @Field("alamat") qAlamat: String,
         @Field("id_cluster") qKelurahan: String,
         @Field("qKecamatan") qKecamatan: String,
-        @Field("agama_id") qAgama: String,
-        @Field("status_kawin") qStatus: String,
-        @Field("pekerjaan_id") qPekerjaan: String,
-        @Field("sex") qJk: String
+        @Field("hubungan_keluarga") qHubunganKeluarga: String,
+        @Field("pendidikan_kk_id") qPendidikan: String,
+        @Field("nama_ayah") qAayah: String,
+        @Field("nama_ibu") qIbu: String,
+        @Field("hubung_warga") qHubung: String,
+
     ): Call<ResponseModel>
 }

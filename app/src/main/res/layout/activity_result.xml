@@ -702,6 +702,106 @@
                                 </LinearLayout>
                             </com.google.android.material.textfield.TextInputLayout>
                             <!-- END NIK-->
+                            <!-- Status -->
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/_10sdp"
+                                        android:text="Status WNI"
+                                        android:textSize="@dimen/_15sdp"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:layout_marginBottom="@dimen/_4sdp"/>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/bg_rounded"
+                                        android:backgroundTint="@color/colorPrimaryLight"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:src="@drawable/ic_text"
+                                            app:tint="@color/colorPrimaryDark"
+                                            android:layout_margin="@dimen/_4sdp"
+                                            android:layout_gravity="center_vertical"
+                                            android:padding="@dimen/_6sdp"
+                                            android:layout_marginRight="@dimen/_5sdp"/>
+
+                                        <androidx.appcompat.widget.AppCompatSpinner
+                                            android:id="@+id/spStatusWni"
+                                            android:layout_width="0dp"
+                                            android:layout_height="@dimen/_40sdp"
+                                            android:layout_weight="1"
+                                            android:spinnerMode="dialog"
+                                            android:layout_gravity="center_vertical"
+                                            android:background="@null" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <!-- END NIK-->
+                            <!-- Status -->
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/_10sdp"
+                                        android:text="Golongan Darah"
+                                        android:textSize="@dimen/_15sdp"
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:layout_marginTop="@dimen/_8sdp"
+                                        android:layout_marginBottom="@dimen/_4sdp"/>
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/bg_rounded"
+                                        android:backgroundTint="@color/colorPrimaryLight"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
+                                        <ImageView
+                                            android:layout_width="@dimen/_25sdp"
+                                            android:layout_height="@dimen/_25sdp"
+                                            android:src="@drawable/ic_text"
+                                            app:tint="@color/colorPrimaryDark"
+                                            android:layout_margin="@dimen/_4sdp"
+                                            android:layout_gravity="center_vertical"
+                                            android:padding="@dimen/_6sdp"
+                                            android:layout_marginRight="@dimen/_5sdp"/>
+
+                                        <androidx.appcompat.widget.AppCompatSpinner
+                                            android:id="@+id/spGoldar"
+                                            android:layout_width="0dp"
+                                            android:layout_height="@dimen/_40sdp"
+                                            android:layout_weight="1"
+                                            android:spinnerMode="dialog"
+                                            android:layout_gravity="center_vertical"
+                                            android:background="@null" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </com.google.android.material.textfield.TextInputLayout>
+                            <!-- END NIK-->
                             <androidx.appcompat.widget.AppCompatButton
                                 android:id="@+id/btnSimpan"
                                 android:layout_width="match_parent"
