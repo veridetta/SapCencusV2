@@ -1,19 +1,19 @@
 package com.example.sapcencuskotlin.model
 
 class KTPModel {
-    var nik: String? = null
-    var nama_lengkap: String? = null
-    var jenis_kelamin: String? = null
-    var agama: String? = null
-    var tempat_lahir: String? = null
-    var tanggal_lahir: String? = null
-    var pekerjaan: String? = null
-    var status_wni: String? = null
-    var rw: String? = null
-    var rt: String? = null
-    var status_kawin: String? = null
-    var goldar: String? = null
-    var alamat: String? = null
-    var kelurahan: String? = null
-    var kecamatan: String? = null
+    var nik: String? = ""
+    var nama_lengkap: String? = ""
+    var jenis_kelamin: String? = ""
+    var agama: String? = ""
+    var tempat_lahir: String? = ""
+    var tanggal_lahir: String? = ""
+    var pekerjaan: String? = ""
+    var status_wni: String? = ""
+    var rw: String? = ""
+    var rt: String? = ""
+    var status_kawin: String? = ""
+    var goldar: String? = ""
+    var alamat: String? = ""
+    var kelurahan: String? = ""
+    var kecamatan: String? = ""
 }

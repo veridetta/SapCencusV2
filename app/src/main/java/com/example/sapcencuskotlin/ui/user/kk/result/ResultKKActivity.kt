@@ -137,6 +137,7 @@ class ResultKKActivity : AppCompatActivity() {
             sIbu = kk.nama_ibu.toString()
             sHubungan = kk.hubungan_keluarga.toString()
             sPendidikan = kk.pendidikan.toString()
+            lyProses.visibility = CoordinatorLayout.GONE
         }
         etAyah.setText(sAyah)
         etIbu.setText(sIbu)
@@ -147,7 +148,7 @@ class ResultKKActivity : AppCompatActivity() {
             qHubungan = hubunganIdList[spHubungan.selectedItemPosition]
             qPendidikan = pendidikanIdList[spPendidikan.selectedItemPosition]
             qHubung = hubunglist[spHubung.selectedItemPosition]
-            if(qAyah.isNotEmpty() && qIbu.isNotEmpty() && qHubungan.isNotEmpty() && qPendidikan.isNotEmpty()){
+            if(qAyah.isNotEmpty() || qIbu.isNotEmpty() || qHubungan.isNotEmpty() || qPendidikan.isNotEmpty()){
                 lyProses.visibility = CoordinatorLayout.VISIBLE
                 val savekk = KKModel()
                 savekk.nama_ayah = qAyah
@@ -166,6 +167,7 @@ class ResultKKActivity : AppCompatActivity() {
     fun postData(){
         val retrofit = Retrofit.Builder()
             .baseUrl("https://desabulila.com")
+//            .baseUrl("http://192.168.1.105")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(ApiService::class.java)

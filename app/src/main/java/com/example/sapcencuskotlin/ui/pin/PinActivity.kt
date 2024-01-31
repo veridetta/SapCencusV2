@@ -43,6 +43,7 @@ class PinActivity : AppCompatActivity() {
     }
     fun initIntent(){
         role = intent.getStringExtra("role").toString()
+        binding.tvRole.text = role
     }
     fun initListener(){
         binding.etPin.isEnabled = false

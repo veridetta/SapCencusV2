@@ -6,11 +6,13 @@ import android.os.Bundle
 import com.example.sapcencuskotlin.R
 import com.example.sapcencuskotlin.databinding.ActivityAdminBinding
 import com.example.sapcencuskotlin.databinding.ActivityUserBinding
+import com.example.sapcencuskotlin.helper.clearKTP
 import com.example.sapcencuskotlin.helper.clearUser
 import com.example.sapcencuskotlin.helper.getUser
 import com.example.sapcencuskotlin.ui.admin.edituser.EditUserActivity
 import com.example.sapcencuskotlin.ui.home.HomeActivity
 import com.example.sapcencuskotlin.ui.user.kk.scan.KKScanActivity
+import com.example.sapcencuskotlin.ui.user.ktp.result.ResultActivity
 import com.example.sapcencuskotlin.ui.user.ktp.scan.KtpScanActivity
 
 class UserActivity : AppCompatActivity() {
@@ -36,6 +38,9 @@ class UserActivity : AppCompatActivity() {
         }
         binding.lyConfirm.btnTidak.setOnClickListener {
             binding.lyConfirm.contentConfirm.visibility = android.view.View.GONE
+            clearKTP(this)
+            val intent = Intent(this, ResultActivity::class.java)
+            startActivity(intent)
         }
         binding.btnLogout.setOnClickListener {
             clearUser(this)

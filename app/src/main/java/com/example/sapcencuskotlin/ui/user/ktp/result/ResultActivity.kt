@@ -1,16 +1,22 @@
 package com.example.sapcencuskotlin.ui.user.ktp.result
 
+import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.Spinner
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.fragment.app.DialogFragment
 import com.example.sapcencuskotlin.R
 import com.example.sapcencuskotlin.api.ApiService
+import com.example.sapcencuskotlin.helper.DatePickerFragment
+import com.example.sapcencuskotlin.helper.OnDateSelectedListener
 import com.example.sapcencuskotlin.helper.cekSimilarity
 import com.example.sapcencuskotlin.helper.getKK
 import com.example.sapcencuskotlin.helper.getKTP
@@ -27,8 +33,9 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
+import java.util.Calendar
 
-class ResultActivity : AppCompatActivity() {
+class ResultActivity : AppCompatActivity(), OnDateSelectedListener {
     lateinit var konten : RelativeLayout
     lateinit var etNik: EditText
     lateinit var spJk: Spinner
@@ -89,6 +96,7 @@ class ResultActivity : AppCompatActivity() {
         initIntent()
         setView()
         getData()
+        initListener()
     }
 
     private fun initView(){
@@ -151,6 +159,7 @@ class ResultActivity : AppCompatActivity() {
     fun getData(){
         val retrofit = Retrofit.Builder()
             .baseUrl("https://desabulila.com") // Ganti BASE_URL_API_ANDA dengan URL base API Anda
+//            .baseUrl("http://192.168.1.105")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         val service = retrofit.create(ApiService::class.java)
@@ -250,9 +259,11 @@ class ResultActivity : AppCompatActivity() {
                     cekSimilarity(spPekerjaan,namaPekerjaanList.toTypedArray(), sPekerjaan)
                     cekSimilarity(spStatusWNI,statusWniList.toTypedArray(), sWni)
                     cekSimilarity(spGoldar,goldarList.toTypedArray(), golDar)
+                    //agar etTanggal hanya bisa di klik, tidak bisa di edit
+                    etTanggal.keyListener = null
                     lyProses.visibility = CoordinatorLayout.GONE
                     btnSimpan.setOnClickListener {
-                        lyProses.visibility = CoordinatorLayout.VISIBLE
+
                         qKtp = etNik.text.toString()
                         qNama = etNama.text.toString()
                         qJk = idJenisKelaminList[namaJenisKelaminList.indexOf(spJk.selectedItem.toString())]
@@ -260,7 +271,9 @@ class ResultActivity : AppCompatActivity() {
                         qTempat = etTempat.text.toString()
                         //etTanggal = 25-10-1972 diubah ke 1972-10-25
                         val tgl = etTanggal.text.toString().split("-")
-                        etTanggal.setText(tgl[2]+"-"+tgl[1]+"-"+tgl[0])
+                        if(tgl.size==3){
+                            etTanggal.setText(tgl[2]+"-"+tgl[1]+"-"+tgl[0])
+                        }
                         qTanggal = etTanggal.text.toString()
                         qPekerjaan = idPekerjaanList[namaPekerjaanList.indexOf(spPekerjaan.selectedItem.toString())]
                         qWni = statusWniIdList[statusWniList.indexOf(spStatusWNI.selectedItem.toString())]
@@ -274,26 +287,32 @@ class ResultActivity : AppCompatActivity() {
                         //masukkan log
                         Log.d("ResultActivity", "datanya: $qKtp $qNama $qTempat $qTanggal $qAlamat $qRt $qRw $qKelurahan $qKecamatan $qAgama $qStatus $qPekerjaan $qJk")
                         //postData()
-                        val ktpData = KTPModel()
-                        ktpData.nik = qKtp
-                        ktpData.nama_lengkap = qNama
-                        ktpData.jenis_kelamin = qJk
-                        ktpData.agama = qAgama
-                        ktpData.tempat_lahir = qTempat
-                        ktpData.tanggal_lahir = qTanggal
-                        ktpData.pekerjaan = qPekerjaan
-                        ktpData.status_wni = qWni
-                        ktpData.rt = qRt
-                        ktpData.rw = qRw
-                        ktpData.status_kawin = qStatus
-                        ktpData.goldar = qGolDar
-                        ktpData.alamat = qAlamat
-                        ktpData.kelurahan = qKelurahan
-                        ktpData.kecamatan = qKecamatan
-                        saveKTP(this@ResultActivity, ktpData)
-                        //intent
-                        val intent = Intent(this@ResultActivity, KKScanActivity::class.java)
-                        startActivity(intent)
+                        //cek kosong
+                        if(qKtp.isNullOrEmpty() || qNama.isNullOrEmpty() || qTempat.isNullOrEmpty() || qTanggal.isNullOrEmpty() || qAlamat.isNullOrEmpty() || qRt.isNullOrEmpty() || qRw.isNullOrEmpty() || qKelurahan.isNullOrEmpty() || qKecamatan.isNullOrEmpty() || qAgama.isNullOrEmpty() || qStatus.isNullOrEmpty() || qPekerjaan.isNullOrEmpty() || qJk.isNullOrEmpty() || qWni.isNullOrEmpty() || qGolDar.isNullOrEmpty()){
+                            showSnackbar(this@ResultActivity,"Pastikan semua sudah terisi")
+                        }else{
+                            lyProses.visibility = CoordinatorLayout.VISIBLE
+                            val ktpData = KTPModel()
+                            ktpData.nik = qKtp
+                            ktpData.nama_lengkap = qNama
+                            ktpData.jenis_kelamin = qJk
+                            ktpData.agama = qAgama
+                            ktpData.tempat_lahir = qTempat
+                            ktpData.tanggal_lahir = qTanggal
+                            ktpData.pekerjaan = qPekerjaan
+                            ktpData.status_wni = qWni
+                            ktpData.rt = qRt
+                            ktpData.rw = qRw
+                            ktpData.status_kawin = qStatus
+                            ktpData.goldar = qGolDar
+                            ktpData.alamat = qAlamat
+                            ktpData.kelurahan = qKelurahan
+                            ktpData.kecamatan = qKecamatan
+                            saveKTP(this@ResultActivity, ktpData)
+                            //intent
+                            val intent = Intent(this@ResultActivity, KKScanActivity::class.java)
+                            startActivity(intent)
+                        }
 
                     }
                 } else {
@@ -312,5 +331,21 @@ class ResultActivity : AppCompatActivity() {
 
             }
         })
+    }
+    fun initListener(){
+        //ketika tanggal diklik akan muncul datepicker
+        etTanggal.setOnClickListener {
+            showDatePicker()
+        }
+    }
+    override fun onDateSelected(selectedDate: String) {
+        etTanggal.setText(selectedDate)
+    }
+
+    // ...
+
+    private fun showDatePicker() {
+        val datePickerFragment = DatePickerFragment(this)
+        datePickerFragment.show(supportFragmentManager, "datePicker")
     }
 }

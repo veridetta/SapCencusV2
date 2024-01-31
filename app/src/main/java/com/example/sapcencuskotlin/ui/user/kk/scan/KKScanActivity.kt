@@ -17,11 +17,17 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.example.sapcencuskotlin.R
+import com.example.sapcencuskotlin.databinding.ActivityKkscanBinding
+import com.example.sapcencuskotlin.databinding.ActivityUserBinding
 import com.example.sapcencuskotlin.graph.GraphicOverlay
+import com.example.sapcencuskotlin.helper.clearKK
+import com.example.sapcencuskotlin.helper.clearKTP
 import com.example.sapcencuskotlin.helper.saveKK
 import com.example.sapcencuskotlin.model.KKModel
 import com.example.sapcencuskotlin.permissionkit.askPermissions
 import com.example.sapcencuskotlin.ui.user.kk.result.ResultKKActivity
+import com.example.sapcencuskotlin.ui.user.ktp.result.ResultActivity
+import com.example.sapcencuskotlin.ui.user.ktp.scan.KtpScanActivity
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.Text
 import com.google.mlkit.vision.text.TextRecognition
@@ -33,6 +39,7 @@ import java.util.PriorityQueue
 
 class KKScanActivity : AppCompatActivity() {
     val TAG = "KKScanActivity"
+    lateinit var binding : ActivityKkscanBinding
     private lateinit var mImageView: ImageView
     private lateinit var  mSelectedImage: Bitmap
     private lateinit var mGraphicOverlay: GraphicOverlay
@@ -63,7 +70,8 @@ class KKScanActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_kkscan)
+        binding = ActivityKkscanBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initview()
         supportActionBar?.hide()
 
@@ -99,10 +107,19 @@ class KKScanActivity : AppCompatActivity() {
     }
     fun initview(){
 
-        btnCamera = findViewById(R.id.btnCamera)
-        btnGallery = findViewById(R.id.btnGalerry)
-        lyProses = findViewById(R.id.lyProses)
+        btnCamera = binding.btnCamera
+        btnGallery = binding.btnGalerry
+        lyProses = binding.lyProses.lyProses
         lyProses.visibility = View.GONE
+        binding.lyConfirm.contentConfirm.visibility = View.VISIBLE
+        binding.lyConfirm.btnYa.setOnClickListener {
+            binding.lyConfirm.contentConfirm.visibility = View.GONE
+        }
+        binding.lyConfirm.btnTidak.setOnClickListener {
+            clearKK(this)
+            val intent = Intent(this, ResultKKActivity::class.java)
+            startActivity(intent)
+        }
 
     }
     private fun reqPermission() {

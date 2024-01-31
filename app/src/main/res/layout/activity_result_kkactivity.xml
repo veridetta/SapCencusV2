@@ -48,7 +48,7 @@
                                 android:id="@+id/tvJudul"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Hasil scan"
+                                android:text="Hasil scan KK"
                                 android:paddingTop="@dimen/_8sdp"
                                 android:layout_marginTop="@dimen/_15sdp"
                                 android:textSize="@dimen/_30sdp"
@@ -97,7 +97,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
                                             android:hint="Nama Ayah"
-                                            android:inputType="number"
+                                            android:inputType="text"
                                             android:background="@null" />
                                     </LinearLayout>
                                 </LinearLayout>

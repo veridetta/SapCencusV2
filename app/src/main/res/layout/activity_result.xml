@@ -48,7 +48,7 @@
                                 android:id="@+id/tvJudul"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Hasil scan"
+                                android:text="Hasil scan KTP"
                                 android:paddingTop="@dimen/_8sdp"
                                 android:layout_marginTop="@dimen/_15sdp"
                                 android:textSize="@dimen/_30sdp"
@@ -98,6 +98,7 @@
                                             android:layout_weight="1"
                                             android:hint="NIK"
                                             android:inputType="number"
+                                            android:maxLength="16"
                                             android:background="@null" />
                                     </LinearLayout>
                                 </LinearLayout>
@@ -247,7 +248,7 @@
                                             android:layout_height="wrap_content"
                                             android:layout_weight="1"
                                             android:hint="Tanggal Lahir"
-                                            android:inputType="text"
+                                            android:inputType="date"
                                             android:background="@null" />
                                     </LinearLayout>
                                 </LinearLayout>

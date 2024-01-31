@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_main">
+    android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -53,5 +51,8 @@
 
         </LinearLayout>
     </RelativeLayout>
-    <include layout="@layout/ly_proses"/>
+    <include layout="@layout/ly_proses"
+        android:id="@+id/ly_proses"/>
+    <include layout="@layout/ly_confirm"
+        android:id="@+id/lyConfirm" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

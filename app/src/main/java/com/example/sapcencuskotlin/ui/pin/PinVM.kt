@@ -5,6 +5,7 @@ import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.example.sapcencuskotlin.helper.saveUser
+import com.example.sapcencuskotlin.helper.showSnackbar
 import com.example.sapcencuskotlin.model.UserModel
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
@@ -25,6 +26,8 @@ class PinVM(application: Application): AndroidViewModel(application) {
                 .addSnapshotListener { value, error ->
                     if (error != null) {
                         _isLoading.postValue(false)
+                        _idle.postValue(false)
+                        showSnackbar(context,"Terjadi kesalahan, silahkan coba lagi")
                         return@addSnapshotListener
                     }
                     //data pertama
