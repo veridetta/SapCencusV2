@@ -73,8 +73,8 @@ class ResultKKActivity : AppCompatActivity() {
         val hubunganList = mutableListOf<String>()
         hubunganList.add("KEPALA KELUARGA")
         hubunganList.add("SUAMI")
-        hubunganList.add("ANAK")
         hubunganList.add("ISTRI")
+        hubunganList.add("ANAK")
         hubunganList.add("MENANTU")
         hubunganList.add("CUCU")
         hubunganList.add("ORANG TUA")
@@ -123,8 +123,8 @@ class ResultKKActivity : AppCompatActivity() {
         pendidikanIdList.add("10")
         initSpinner(spPendidikan, pendidikanList.toTypedArray())
         val hubunglist = mutableListOf<String>()
-        hubunglist.add("EMAIL")
-        hubunglist.add("TELEGRAM")
+        hubunglist.add("Email")
+        hubunglist.add("Telegram")
         initSpinner(spHubung, hubunglist.toTypedArray())
         btnSimpan = findViewById(R.id.btnSimpan)
         lyProses = findViewById(R.id.lyProses)
@@ -147,7 +147,8 @@ class ResultKKActivity : AppCompatActivity() {
             //qTtl = etTtl.text.toString()
             qHubungan = hubunganIdList[spHubungan.selectedItemPosition]
             qPendidikan = pendidikanIdList[spPendidikan.selectedItemPosition]
-            qHubung = hubunglist[spHubung.selectedItemPosition]
+            //ambil value ddari data terpilih
+            qHubung = spHubung.selectedItem.toString()
             if(qAyah.isNotEmpty() || qIbu.isNotEmpty() || qHubungan.isNotEmpty() || qPendidikan.isNotEmpty()){
                 lyProses.visibility = CoordinatorLayout.VISIBLE
                 val savekk = KKModel()
