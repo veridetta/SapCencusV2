@@ -100,6 +100,9 @@ class PinActivity : AppCompatActivity() {
                 if(it){
                     val userData = getUser(this)
                     if(userData.isLogin){
+                        if(userData.role != role){
+                            showSnackbar(this, "Login Failed")
+                        }
                         if(userData.role == "admin"){
                             showSnackbar(this, "Welcome ${userData.name}")
                             val intent  = Intent(this, AdminActivity::class.java)

@@ -11,6 +11,7 @@ import com.example.sapcencuskotlin.helper.clearUser
 import com.example.sapcencuskotlin.helper.getUser
 import com.example.sapcencuskotlin.ui.admin.edituser.EditUserActivity
 import com.example.sapcencuskotlin.ui.home.HomeActivity
+import com.example.sapcencuskotlin.ui.user.data.view.ViewActivity
 import com.example.sapcencuskotlin.ui.user.kk.scan.KKScanActivity
 import com.example.sapcencuskotlin.ui.user.ktp.result.ResultActivity
 import com.example.sapcencuskotlin.ui.user.ktp.scan.KtpScanActivity
@@ -47,6 +48,11 @@ class UserActivity : AppCompatActivity() {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()
+        }
+
+        binding.btnData.setOnClickListener {
+            val intent = Intent(this, ViewActivity::class.java)
+            startActivity(intent)
         }
     }
     fun setView(){

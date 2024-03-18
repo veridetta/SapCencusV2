@@ -71,6 +71,16 @@
                 android:background="@drawable/bg_rounded"
                 android:backgroundTint="@color/colorPrimaryDark"/>
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnData"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lihat Data"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textSize="@dimen/_12sdp"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_rounded"
+                android:backgroundTint="@color/colorSecondaryText"/>
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLogout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

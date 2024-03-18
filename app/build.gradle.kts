@@ -73,4 +73,6 @@ dependencies {
     implementation("com.google.firebase:firebase-appcheck-debug:17.1.1")
     //appcheck
 
+    implementation ("com.github.acefalobi:android-stepper:0.3.0")
+
 }

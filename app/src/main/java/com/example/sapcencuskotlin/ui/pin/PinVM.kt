@@ -30,6 +30,13 @@ class PinVM(application: Application): AndroidViewModel(application) {
                         showSnackbar(context,"Terjadi kesalahan, silahkan coba lagi")
                         return@addSnapshotListener
                     }
+                    //cek ada data atau tidak
+                    if (value?.isEmpty == true){
+                        _isLoading.postValue(false)
+                        _idle.postValue(false)
+                        showSnackbar(context,"Pin yang anda masukkan salah")
+                        return@addSnapshotListener
+                    }
                     //data pertama
                     val data = value?.documents?.get(0)
                     val hasil = data?.toObject(UserModel::class.java)

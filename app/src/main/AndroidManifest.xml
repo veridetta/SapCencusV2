@@ -31,6 +31,24 @@
         android:theme="@style/Theme.SapCencus"
         tools:targetApi="31">
         <activity
+            android:name=".ui.user.data.cari.LoadActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.user.data.cari.KtpCariActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.user.data.input.InputActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.user.data.cari.CariActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.user.data.edit.EditDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.user.data.view.ViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.user.kk.result.ResultKKActivity"
             android:exported="false" />
         <activity
