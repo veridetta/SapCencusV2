@@ -118,8 +118,20 @@ class EditDataActivity : AppCompatActivity() {
             binding.lyDataOrangTua.etIbuNik.setText(it[0].ibu_nik)
             binding.lyDataOrangTua.etNamaIbu.setText(it[0].nama_ibu)
             binding.lyDataAlamat.etAlamat.setText(it[0].alamat)
-            val dusun = cekNull(it[0].dusun)
-            binding.lyDataAlamat.spDusun.setSelection(dusun.toInt())
+            var dusun = ""
+            if (it[0].dusun == null || it[0].dusun == "null" || it[0].dusun.isEmpty()) {
+                binding.lyDataAlamat.spDusun.setSelection(0)
+            } else {
+                dusun = it[0].dusun
+                val selectedHubung = list_dusun.indexOf(dusun)
+                Log.d("Hubung Warga", selectedHubung.toString()+" "+dusun)
+                if (selectedHubung == -1) {
+                    binding.lyDataAlamat.spDusun.setSelection(0)
+                } else {
+                    binding.lyDataAlamat.spDusun.setSelection(selectedHubung)
+                }
+            }
+
 //            binding.lyDataAlamat.spRw.setSelection(it[0].rw.toInt())
 //            binding.lyDataAlamat.spIdCluster.setSelection(it[0].id_cluster.toInt())
             binding.lyDataAlamat.etAlamatSebelumnya.setText(it[0].alamat_sebelumnya)
@@ -130,7 +142,9 @@ class EditDataActivity : AppCompatActivity() {
             if (it[0].hubung_warga == null || it[0].hubung_warga == "null" || it[0].hubung_warga.isEmpty()) {
                 binding.lyDataAlamat.spHubungWarga.setSelection(0)
             } else {
+                hubungWarga = it[0].hubung_warga
                 val selectedHubung = list_hubung_warga.indexOf(hubungWarga)
+                Log.d("Hubung Warga", selectedHubung.toString()+" "+hubungWarga)
                 if (selectedHubung == -1) {
                     binding.lyDataAlamat.spHubungWarga.setSelection(0)
                 } else {
