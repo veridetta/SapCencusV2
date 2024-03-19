@@ -24,10 +24,12 @@ class BiodataAdapter(
     val context: Context, 
     private val onEditClickListener: (DataPenduduk) -> Unit,
 ) : RecyclerView.Adapter<BiodataAdapter.ProductViewHolder>() {
-    public var filteredBarangList: MutableList<DataPenduduk> = mutableListOf()
+    var filteredBarangList: MutableList<DataPenduduk> = mutableListOf()
     init {
         filteredBarangList.addAll(barangList)
-        Log.d("Data f",filteredBarangList.size.toString())
+        //log data urutan pertama dan kedua
+        Log.d("Data 1", filteredBarangList[0].nama.toString())
+        Log.d("Data 2", filteredBarangList[1].nama.toString())
     }
     override fun getItemViewType(position: Int): Int {
         return if (position == 0 && filteredBarangList.isEmpty()) {
@@ -44,20 +46,16 @@ class BiodataAdapter(
                 val nam = product.nama?.toLowerCase(Locale.getDefault())?.contains(lowerCaseQuery)
                 val nik = product.nik?.toLowerCase(Locale.getDefault())?.contains(lowerCaseQuery)
                 Log.d("Kunci ", lowerCaseQuery)
-                if (nam == true) {
+                if (nam == true || nik == true) {
                     filteredBarangList.add(product)
                     Log.d("Ada ", product.nama.toString())
                 }
-                if (nik == true) {
-                    filteredBarangList.add(product)
-                    Log.d("Ada ", product.nik.toString())
-                }
             }
         } else {
+            filteredBarangList.clear()
             filteredBarangList.addAll(barangList)
         }
         notifyDataSetChanged()
-        Log.d("Data f",filteredBarangList.size.toString())
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val itemView = LayoutInflater.from(parent.context)

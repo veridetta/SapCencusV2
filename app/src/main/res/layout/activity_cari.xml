@@ -104,16 +104,6 @@
                         android:backgroundTint="@color/colorPrimary"
                         android:padding="@dimen/_8sdp"
                         android:background="@drawable/bg_rounded" />
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_scan"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Scan KTP"
-                        android:layout_marginTop="@dimen/_10sdp"
-                        android:textSize="@dimen/_12sdp"
-                        android:textColor="@color/white"
-                        android:background="@drawable/bg_rounded"
-                        android:backgroundTint="@color/colorSecondaryText"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

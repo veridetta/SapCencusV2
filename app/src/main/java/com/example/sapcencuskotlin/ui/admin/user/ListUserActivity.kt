@@ -33,6 +33,7 @@ class ListUserActivity : AppCompatActivity() {
         vm = ViewModelProvider(this)[ListUserVM::class.java]
         binding = ActivityListUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.lyLoading.contentLoading.visibility = View.VISIBLE
     }
     fun initRv(){
         val layoutManager = LinearLayoutManager(this)

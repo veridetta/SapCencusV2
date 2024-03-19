@@ -51,8 +51,6 @@ class ViewActivity : AppCompatActivity() {
             data = getData
             dataList.clear()
             dataList.addAll(data)
-            Log.d("Data", dataList.toString())
-
             adapter = BiodataAdapter(dataList, this) { barang -> editBarang(barang) }
             binding.rvPenduduk.apply {
                 setHasFixedSize(true)

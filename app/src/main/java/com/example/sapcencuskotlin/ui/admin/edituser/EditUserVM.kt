@@ -43,6 +43,7 @@ class EditUserVM(application: Application): AndroidViewModel(application) {
                     _idle.postValue(true)
                     _isLoading.postValue(false)
                 }
+//            _isLoading.postValue(false)
         }
     }
 }

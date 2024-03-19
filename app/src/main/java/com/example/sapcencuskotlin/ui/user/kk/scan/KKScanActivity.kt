@@ -111,7 +111,8 @@ class KKScanActivity : AppCompatActivity() {
         btnGallery = binding.btnGalerry
         lyProses = binding.lyProses.lyProses
         lyProses.visibility = View.GONE
-        binding.lyConfirm.contentConfirm.visibility = View.VISIBLE
+        binding.lyConfirm.contentConfirm.visibility = View.GONE
+//        binding.lyConfirm.contentConfirm.visibility = View.VISIBLE
         binding.lyConfirm.btnYa.setOnClickListener {
             binding.lyConfirm.contentConfirm.visibility = View.GONE
         }

@@ -33,6 +33,7 @@ class EditUserActivity : AppCompatActivity() {
                 binding.lyLoading.contentLoading.visibility = View.VISIBLE
             }else{
                 binding.lyLoading.contentLoading.visibility = View.GONE
+                finish()
             }
         }
     }
@@ -66,14 +67,10 @@ class EditUserActivity : AppCompatActivity() {
                 binding.etPin2.requestFocus()
                 return@setOnClickListener
             }
-            vm.sendData.observe(this){
-                if (it != null){
-                    finish()
-                }
-            }
             val user = UserModel()
             user.name = nama
             user.pin = pin
+            user.docid = getTempUser(this).docid
             vm.postData( user,this)
         }
     }

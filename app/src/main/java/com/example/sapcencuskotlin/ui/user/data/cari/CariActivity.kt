@@ -30,9 +30,5 @@ class CariActivity : AppCompatActivity() {
             intent.putExtra("nik", nik)
             startActivity(intent)
         }
-        binding.btnScan.setOnClickListener {
-            val intent = Intent(this, KtpCariActivity::class.java)
-            startActivity(intent)
-        }
     }
 }
